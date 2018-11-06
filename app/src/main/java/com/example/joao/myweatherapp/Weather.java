@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,7 +17,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,22 +44,17 @@ public class Weather extends AppCompatActivity {
                 callAPI();
             }
         });
-
     }
 
     private void callAPI() {
         final TextView mTextView = (TextView) findViewById(R.id.mTextView);
 
-
         RequestQueue queue = Volley.newRequestQueue(this);
 
-// Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
                         Dataclass dataResponse;
 
                         try {
@@ -69,7 +62,6 @@ public class Weather extends AppCompatActivity {
                             dataResponse = gson.fromJson(response, Dataclass.class);
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();
-
                         }
 
                         try {
@@ -78,8 +70,6 @@ public class Weather extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -88,7 +78,6 @@ public class Weather extends AppCompatActivity {
             }
         });
 
-// Add the request to the RequestQueue.
         queue.add(stringRequest);
 
     }
@@ -156,12 +145,8 @@ public class Weather extends AppCompatActivity {
                     public String value;
                 }
             }
-
         }
-
     }
-
-
     }
 
 
