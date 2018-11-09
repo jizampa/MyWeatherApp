@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(MainActivity.this, Weather.class);
+                intent = new Intent(MainActivity.this, WeatherClass.class);
                 startActivity(intent);
 
             }

@@ -1,108 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp" >
+    android:paddingRight="16dp"
+    tools:layout_editor_absoluteY="25dp">
 
 
     <TextView
-        android:id="@+id/tvCurrenTemp"
-        android:layout_width="128dp"
-        android:layout_height="95dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:text="30"
-        android:textAlignment="center"
-        android:textSize="60sp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginTop="177dp"
-        android:text="Min" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_alignTop="@+id/textView6"
-        android:text="Max" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView6"
-        android:layout_marginStart="146dp"
-        android:text="15" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView6"
-        android:layout_marginEnd="147dp"
-        android:text="35" />
-
-    <RadioGroup
-        android:layout_width="146dp"
-        android:layout_height="107dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="49dp">
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Next 7 days" />
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Past 7 days" />
-
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Past 7 years" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btnTest"
+        android:id="@+id/tv05Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="117dp"
-        android:layout_marginEnd="-146dp"
-        android:layout_toStartOf="@+id/textView6"
-        android:text="Button" />
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="40dp"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv04Value"
+        app:layout_constraintEnd_toStartOf="@+id/tv04Value" />
+
+        <TextView
+            android:id="@+id/tvCurrenFL"
+            android:layout_width="128dp"
+            android:layout_height="95dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textSize="60sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionWeather" />
+
+        <TextView
+            android:id="@+id/tvCurrentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <RadioGroup
+            android:id="@+id/rbGroup"
+            android:layout_width="326dp"
+            android:layout_height="47dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.104">
+
+            <RadioButton
+                android:id="@+id/rb7Years"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Past 7 Years" />
+
+            <RadioButton
+                android:id="@+id/rbpast7Days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Past 7 days" />
+
+            <RadioButton
+                android:id="@+id/rb7NextDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Next 7 days" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Current Temperature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrenFL" />
+
+        <TextView
+            android:id="@+id/tvDescriptionWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mTextView"
-        android:layout_width="174dp"
-        android:layout_height="199dp"
-        android:layout_alignEnd="@+id/tvCurrenTemp"
-        android:layout_alignTop="@+id/btnTest"
-        android:layout_marginEnd="-116dp"
-        android:layout_marginTop="-51dp"
-        android:text="TextView" />
+        android:id="@+id/tv04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:text="2014"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbGroup" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tv05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="16dp"
+        android:text="2013"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
+        app:layout_constraintEnd_toStartOf="@+id/tv04" />
+
+    <TextView
+        android:id="@+id/tv06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="16dp"
+        android:text="2012"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv05"
+        app:layout_constraintEnd_toStartOf="@+id/tv05" />
+
+    <TextView
+        android:id="@+id/tv07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="16dp"
+        android:text="2011"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv06"
+        app:layout_constraintEnd_toStartOf="@+id/tv06" />
+
+    <TextView
+        android:id="@+id/tv01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:text="2017"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv02"
+        app:layout_constraintStart_toEndOf="@+id/tv02" />
+
+    <TextView
+        android:id="@+id/tv03"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:text="2015"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
+        app:layout_constraintStart_toEndOf="@+id/tv04" />
+
+    <TextView
+        android:id="@+id/tv02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:text="2016"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv03"
+        app:layout_constraintStart_toEndOf="@+id/tv03" />
+
+    <TextView
+        android:id="@+id/tv02Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
+        app:layout_constraintStart_toEndOf="@+id/tv03Value" />
+
+        <TextView
+            android:id="@+id/tv03Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="40dp"
+            android:text="00"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv04Value"
+            app:layout_constraintStart_toEndOf="@+id/tv04Value" />
+
+    <TextView
+        android:id="@+id/tv01Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
+        app:layout_constraintStart_toEndOf="@+id/tv02Value" />
+
+    <TextView
+        android:id="@+id/tv04Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv04" />
+
+    <TextView
+        android:id="@+id/tv06Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv05Value"
+        app:layout_constraintEnd_toStartOf="@+id/tv05Value" />
+
+    <TextView
+        android:id="@+id/tv07Value"
+        android:layout_width="9dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv05Value"
+        app:layout_constraintEnd_toStartOf="@+id/tv06Value" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="364dp"
+            android:layout_height="192dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv04Value" />
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>
