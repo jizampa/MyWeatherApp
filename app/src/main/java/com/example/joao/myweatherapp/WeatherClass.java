@@ -6,6 +6,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,8 +30,10 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.MonthDay;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class WeatherClass extends AppCompatActivity {
@@ -59,7 +62,9 @@ public class WeatherClass extends AppCompatActivity {
 
     RadioButton rb7Years;
     RadioButton rbNext7Days;
+    RadioButton rbPast7Months;
     RadioButton rbPast7Days;
+
     RadioGroup rbGroup;
 
     GraphView graph;
@@ -68,6 +73,7 @@ public class WeatherClass extends AppCompatActivity {
     String day ;
     String monthNumber ;
     String year;
+    String dayMonthYear;
 
     double value00;
     double value01;
@@ -86,6 +92,7 @@ public class WeatherClass extends AppCompatActivity {
     boolean resp06;
     boolean resp07;
 
+    Calendar caledar;
 
     //String urlBasePastYears ="https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=";
     String urlLast01 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2017-11-07";
@@ -96,10 +103,17 @@ public class WeatherClass extends AppCompatActivity {
     String urlLast06 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2012-11-07";
     String urlLast07 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2011-11-07";
     String urlNext7Days ="https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2018-11-09";
-    String urlBasePastYears01 ="https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=";
+    String urlBase;
     String urlCity02 = "winnipeg";
     String urlAfterCity03 = "&format=json&date=";
     String date04 = "";
+    String formattedDateMenos1="";
+    int[] valueXGraph;
+    int[] valueXGraphDay;
+    int[] valueXGraphMonth;
+    int[] valueXGraphYear;
+    int[][] arrayDate;
+    String graphOrientation;
 
 
     private RequestQueue mReqQueue;
@@ -129,6 +143,8 @@ public class WeatherClass extends AppCompatActivity {
 
         rb7Years = findViewById(R.id.rb7Years);
         rbPast7Days = findViewById(R.id.rbpast7Days);
+        rbPast7Months = findViewById(R.id.rbpast7Months);
+        rbNext7Days = findViewById(R.id.rb7NextDays);
 
         rbGroup = findViewById(R.id.rbGroup);
 
@@ -146,6 +162,12 @@ public class WeatherClass extends AppCompatActivity {
         value05=0;
         value06=0;
         value07=0;
+        valueXGraphDay = new int[7];
+        valueXGraphMonth = new int[7];
+        valueXGraphYear = new int[7];
+        arrayDate = new int [7][3];
+
+
        // url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=Winnipeg&format=json&num_of_days=5";
         url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json";
 //        urlLast01 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=";
@@ -158,13 +180,33 @@ public class WeatherClass extends AppCompatActivity {
         ///////////////////
         // Getting the current date
         /////////////////////
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = df.format(c);
+       caledar =  Calendar.getInstance();
+        Date today = caledar.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateToday = df.format(today);
+
+        caledar.add(Calendar.DAY_OF_YEAR, 1);
+        Date today01 = caledar.getTime();
+        SimpleDateFormat df01 = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateToday01 = df01.format(today01);
+
+        caledar = Calendar.getInstance();
+        caledar.add(Calendar.MONTH, -12);
+        Date todayMenus01 = caledar.getTime();
+        SimpleDateFormat dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateMenos1 = df01.format(todayMenus01);
+
+        caledar.add(Calendar.DAY_OF_YEAR, -1);
+        Date todayMenus01Ano = caledar.getTime();
+        SimpleDateFormat dfmenos01Ano = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateToday01Ano = df01.format(todayMenus01);
+
+
+
 
         Date date = null;
         try {
-            date = df.parse(formattedDate);
+            date = df.parse(formattedDateToday);
 
             day          = (String) DateFormat.format("dd",   date); // 20
             monthNumber  = (String) DateFormat.format("MM",   date); // 06
@@ -186,7 +228,17 @@ public class WeatherClass extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (rb7Years.isChecked()) {
+                    urlBase ="https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=";
+                    value01=0.0;
+                    value02=0.0;
+                    value03=0.0;
+                    value04=0;
+                    value05=0;
+                    value06=0;
+                    value07=0;
                     int i = 1;
+                    graphOrientation = "past";
+                    dayMonthYear= "year";
 
                     String testUrl;
 
@@ -203,12 +255,95 @@ public class WeatherClass extends AppCompatActivity {
 
         });
 
+        rbPast7Months.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rbPast7Months.isChecked()) {
+                    urlBase ="https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=";
+                    value01=0.0;
+                    value02=0.0;
+                    value03=0.0;
+                    value04=0;
+                    value05=0;
+                    value06=0;
+                    value07=0;
+                    dayMonthYear= "month";
+                    graphOrientation = "past";
+                    int i = 1;
+                    String testUrl;
+                    do {
+                        testUrl = formatedUrl(i, "sub", "month");
+
+                        callAPI(testUrl, i);
+                        i++;
+
+                    } while (i < 8);
+                }
+            }
+        });
+
         rbPast7Days.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                String test= "tet";
+                if (rbPast7Days.isChecked()) {
+                    value01=0.0;
+                    value02=0.0;
+                    value03=0.0;
+                    value04=0;
+                    value05=0;
+                    value06=0;
+                    value07=0;
+                    dayMonthYear="day";
+                    graphOrientation = "past";
+                    int i = 1;
+                    String testUrl;
+                    do {
+                        testUrl = formatedUrl(i, "sub", "day");
+
+                        callAPI(testUrl, i);
+                        i++;
+
+                    } while (i < 8);
+                }
+
             }
         });
+        rbNext7Days.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (rbNext7Days.isChecked()) {
+                    urlBase = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=";
+                    value01=0.0;
+                    value02=0.0;
+                    value03=0.0;
+                    value04=0;
+                    value05=0;
+                    value06=0;
+                    value07=0;
+                    int i = 1;
+                    graphOrientation = "future";
+                    String testUrl;
+                    do {
+                        testUrl = formatedUrl(i, "add", "day");
+
+                        callAPI(testUrl, i);
+                        i++;
+
+                    } while (i < 8);
+                }
+
+            }
+        });
+
+
+        //////////////////////////////////
+        ////////TESTING AREA
+        //////////////////////////////////////
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.add(Calendar.DATE, 1);
+
+
+
     }
 ////////////////////////////////////
     ///My functions
@@ -219,6 +354,12 @@ public class WeatherClass extends AppCompatActivity {
         int dayToModify=0;
         int yearToModify=0;
         int monthToModify=0;
+        String monthDay;
+
+
+        Date todayMenus01;
+        SimpleDateFormat dfmenos01,monthDayDF;
+
 
 
         Date c = Calendar.getInstance().getTime();
@@ -230,48 +371,83 @@ public class WeatherClass extends AppCompatActivity {
 
         switch (field){
             case "day":
-                dayToModify = (operation == "sub"? dayToModify - num : dayToModify + num);
+                num = (operation == "sub"? num * -1 : num);
+                caledar = Calendar.getInstance();
+                caledar.add(Calendar.DAY_OF_YEAR, num);
+                todayMenus01 = caledar.getTime();
+                dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
+
+//                monthDayDF = new SimpleDateFormat("MMM-dd");
+//                monthDay = monthDayDF.format(todayMenus01);
+                formattedDateMenos1 = dfmenos01.format(todayMenus01);
+                //dayToModify = (operation == "sub"? dayToModify - num : dayToModify + num);
                 break;
             case "month":
+                caledar = Calendar.getInstance();
+                caledar.add(Calendar.MONTH, (-1 *num));
+                todayMenus01 = caledar.getTime();
+                dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
+                formattedDateMenos1 = dfmenos01.format(todayMenus01);
 
-                monthToModify = (operation == "sub"? monthToModify - num : monthToModify + num);
+                //yearToModify = (operation == "sub"? yearToModify - num : yearToModify + num);
+
+                //monthToModify = (operation == "sub"? monthToModify - num : monthToModify + num);
                 break;
             case "year":
-
+                caledar = Calendar.getInstance();
+                caledar.add(Calendar.MONTH, (-12 * num));
+                todayMenus01 = caledar.getTime();
+                dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
+                formattedDateMenos1 = dfmenos01.format(todayMenus01);
                 yearToModify = (operation == "sub"? yearToModify - num : yearToModify + num);
-
-
                 break;
+
         }
-        String result = String.format("%s%s%s%d/%02d/%02d",urlBasePastYears01,urlCity02,urlAfterCity03,yearToModify,monthToModify,dayToModify );
+        num =  Math.abs(num);
+        valueXGraphYear[num-1] = caledar.get(Calendar.YEAR);
+        valueXGraphMonth[num-1] = (caledar.get(Calendar.MONTH))+1;
+        valueXGraphDay[num-1] = caledar.get(Calendar.DAY_OF_MONTH);
+        arrayDate[num-1][0]=caledar.get(Calendar.DAY_OF_MONTH);
+        arrayDate[num-1][1]=(caledar.get(Calendar.MONTH))+1;
+        arrayDate[num-1][2]=caledar.get(Calendar.YEAR);
+        //String result = String.format("%s%s%s%d/%02d/%02d",urlBasePastYears01,urlCity02,urlAfterCity03,yearToModify,monthToModify,dayToModify );
+        String result = String.format("%s%s%s%s",urlBase,urlCity02,urlAfterCity03,formattedDateMenos1);
 
         return result;
     }
 
-    private void setText(int field, String value){
-        switch (field){
-            case 1:
-                tvText01.setText(String.valueOf(value));
-                break;
-            case 2:
-                tvText02.setText(String.valueOf(value));
-                break;
-            case 3:
-                tvText03.setText(String.valueOf(value));
-                break;
-            case 4:
-                tvText04.setText(String.valueOf(value));
-                break;
-            case 5:
-                tvText05.setText(String.valueOf(value));
-                break;
-            case 6:
-                tvText06.setText(String.valueOf(value));
-                break;
-            case 7:
-                tvText07.setText(String.valueOf(value));
-                break;
-        }
+    private void setText(int field, Calendar cal, String dayYearOrMonth){
+       SimpleDateFormat monthDay, day, year;
+
+
+
+        cal = Calendar.getInstance();
+        cal.get(Calendar.DAY_OF_MONTH);
+
+
+//        switch (field){
+//            case 1:
+//                tvText01.setText(String.valueOf(value));
+//                break;
+//            case 2:
+//                tvText02.setText(String.valueOf(value));
+//                break;
+//            case 3:
+//                tvText03.setText(String.valueOf(value));
+//                break;
+//            case 4:
+//                tvText04.setText(String.valueOf(value));
+//                break;
+//            case 5:
+//                tvText05.setText(String.valueOf(value));
+//                break;
+//            case 6:
+//                tvText06.setText(String.valueOf(value));
+//                break;
+//            case 7:
+//                tvText07.setText(String.valueOf(value));
+//                break;
+//        }
 
     }
 
@@ -300,41 +476,46 @@ public class WeatherClass extends AppCompatActivity {
                                 break;
                                 case 1:
                                     value01 = Double.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv01Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv01Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
+
                                     resp01=true;
                                     break;
                                 case 2:
                                     value02 = Double.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv02Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv02Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp02=true;
                                     break;
                                 case 3:
                                     value03 = Double.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv03Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv03Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp03=true;
                                     break;
                                 case 4:
                                     value04 = Integer.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv04Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv04Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp04=true;
                                     break;
                                 case 5:
                                     value05 = Integer.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv05Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv05Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp05=true;
                                     break;
                                 case 6:
                                     value06 = Integer.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv06Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv06Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp06=true;
                                     break;
                                 case 7:
                                     value07 = Integer.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
-                                    tv07Value.setText(json.get("data/weather[0]/hourly[4]/tempC"));
+                                    tv07Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
                                     resp07=true;
                                     break;
 
                             }
+                            if (flag!= 0){
+                                graphCriator();
+                            }
+
 
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();
@@ -342,11 +523,7 @@ public class WeatherClass extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        if (resp01==true && resp02==true && resp03==true && resp04==true && resp05==true && resp06==true && resp07==true){
-                            graphCriator();
-                            resp01=resp02=resp03=resp04=resp05=resp06=resp07= false;
-
-                        }
+//
 
                     }
                 }, new Response.ErrorListener() {
@@ -359,10 +536,29 @@ public class WeatherClass extends AppCompatActivity {
         queue.add(stringRequest);
 
     }
+
+
+
+
+
     private void graphCriator(){
 
+        switch (dayMonthYear){
+            case "day":
+                valueXGraph = valueXGraphDay;
+                break;
+            case "month":
+                valueXGraph = valueXGraphMonth;
+                break;
+            case "year":
+                valueXGraph = valueXGraphYear;
+                break;
+
+        }
+
+
         graph = findViewById(R.id.graph);
-        graph.clearSecondScale();
+        graph.removeAllSeries();
         Log.d("vaulues -00", String.valueOf(value00));
         Log.d("vaulues -01", String.valueOf(value01));
         Log.d("vaulues -02", String.valueOf(value02));
@@ -370,23 +566,81 @@ public class WeatherClass extends AppCompatActivity {
         Log.d("vaulues -04", String.valueOf(value04));
         Log.d("vaulues -05", String.valueOf(value05));
         Log.d("vaulues -06", String.valueOf(value06));
-        Log.d("vaulues -07", String.valueOf(value07));
+        LineGraphSeries<DataPoint> series;
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+
+        if (graphOrientation == "past"){
+
+            tvText01.setText(String.valueOf(valueXGraph[0]));
+            tvText02.setText(String.valueOf(valueXGraph[1]));
+            tvText03.setText(String.valueOf(valueXGraph[2]));
+            tvText04.setText(String.valueOf(valueXGraph[3]));
+            tvText05.setText(String.valueOf(valueXGraph[4]));
+            tvText06.setText(String.valueOf(valueXGraph[5]));
+            tvText07.setText(String.valueOf(valueXGraph[6]));
+
+           series = new LineGraphSeries<>(new DataPoint[] {
+
 
 //
+//                new DataPoint(valueXGraph[0], value07),
+//                new DataPoint(valueXGraph[1], value06),
+//                new DataPoint(valueXGraph[2], value05),
+//                new DataPoint(valueXGraph[3], value04),
+//                new DataPoint(valueXGraph[4], value03),
+//                new DataPoint(valueXGraph[5], value02),
+//                new DataPoint(valueXGraph[6], value01)
+                    new DataPoint(1, value07),
+                    new DataPoint(2, value06),
+                    new DataPoint(3, value05),
+                    new DataPoint(4, value04),
+                    new DataPoint(5, value03),
+                    new DataPoint(6, value02),
+                    new DataPoint(7, value01)
 
 
-                new DataPoint(11, value07),
-                new DataPoint(12, value06),
-                new DataPoint(13, value05),
-                new DataPoint(14, value04),
-                new DataPoint(15, value03),
-                new DataPoint(16, value02),
-                new DataPoint(17, value01),
-                new DataPoint(18, value00)
-        });
-        graph.addSeries(series);
+            });
+            graph.addSeries(series);
+
+        }else{
+            tvText01.setText(String.valueOf(valueXGraph[6]));
+            tvText02.setText(String.valueOf(valueXGraph[5]));
+            tvText03.setText(String.valueOf(valueXGraph[4]));
+            tvText04.setText(String.valueOf(valueXGraph[3]));
+            tvText05.setText(String.valueOf(valueXGraph[2]));
+            tvText06.setText(String.valueOf(valueXGraph[1]));
+            tvText07.setText(String.valueOf(valueXGraph[0]));
+            try {
+
+
+                series = new LineGraphSeries<>(new DataPoint[]{
+//
+//                new DataPoint(valueXGraph[0], value07),
+//                new DataPoint(valueXGraph[1], value06),
+//                new DataPoint(valueXGraph[2], value05),
+//                new DataPoint(valueXGraph[3], value04),
+//                new DataPoint(valueXGraph[4], value03),
+//                new DataPoint(valueXGraph[5], value02),
+//                new DataPoint(valueXGraph[6], value01)
+                        new DataPoint(valueXGraph[0], value01),
+                        new DataPoint(2, value02),
+                        new DataPoint(3, value03),
+                        new DataPoint(4, value04),
+                        new DataPoint(5, value05),
+                        new DataPoint(6, value06),
+                        new DataPoint(7, value07)
+
+                });
+                graph.addSeries(series);
+            }
+            catch (Exception e){
+                Log.d("error",e.toString());
+            }
+
+        }
+
+
+
 
     }
 

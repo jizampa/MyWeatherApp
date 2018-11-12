@@ -17,16 +17,17 @@
     tools:layout_editor_absoluteY="25dp">
 
 
-    <TextView
-        android:id="@+id/tv05Value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="40dp"
-        android:text="0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv04Value"
-        app:layout_constraintEnd_toStartOf="@+id/tv04Value" />
+        <TextView
+            android:id="@+id/tv05Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="2dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv04Value"
+            app:layout_constraintEnd_toStartOf="@+id/tv04Value" />
 
         <TextView
             android:id="@+id/tvCurrenFL"
@@ -53,7 +54,7 @@
 
         <RadioGroup
             android:id="@+id/rbGroup"
-            android:layout_width="326dp"
+            android:layout_width="390dp"
             android:layout_height="47dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -73,7 +74,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Past 7 Years" />
+                android:text="Past 7 Years"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rbpast7Months"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Past 7 Months"
+                android:textSize="11sp" />
 
             <RadioButton
                 android:id="@+id/rbpast7Days"
@@ -81,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Past 7 days" />
+                android:text="Past 7 days"
+                android:textSize="11sp" />
 
             <RadioButton
                 android:id="@+id/rb7NextDays"
@@ -89,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Next 7 days" />
+                android:text="Next 7 days"
+                android:textSize="11sp" />
         </RadioGroup>
 
         <TextView
@@ -118,146 +131,159 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp"
-        android:text="2014"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rbGroup" />
-
-    <TextView
-        android:id="@+id/tv05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="16dp"
-        android:text="2013"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
-        app:layout_constraintEnd_toStartOf="@+id/tv04" />
-
-    <TextView
-        android:id="@+id/tv06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="16dp"
-        android:text="2012"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv05"
-        app:layout_constraintEnd_toStartOf="@+id/tv05" />
-
-    <TextView
-        android:id="@+id/tv07"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="16dp"
-        android:text="2011"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv06"
-        app:layout_constraintEnd_toStartOf="@+id/tv06" />
-
-    <TextView
-        android:id="@+id/tv01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:text="2017"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv02"
-        app:layout_constraintStart_toEndOf="@+id/tv02" />
-
-    <TextView
-        android:id="@+id/tv03"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:text="2015"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
-        app:layout_constraintStart_toEndOf="@+id/tv04" />
-
-    <TextView
-        android:id="@+id/tv02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:text="2016"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv03"
-        app:layout_constraintStart_toEndOf="@+id/tv03" />
-
-    <TextView
-        android:id="@+id/tv02Value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:text="0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
-        app:layout_constraintStart_toEndOf="@+id/tv03Value" />
+        <TextView
+            android:id="@+id/tv04"
+            android:layout_width="46dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="24dp"
+            android:text="2014"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rbGroup" />
 
         <TextView
-            android:id="@+id/tv03Value"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv05"
+            android:layout_width="46dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="2dp"
+            android:text="2013"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
+            app:layout_constraintEnd_toStartOf="@+id/tv04" />
+
+        <TextView
+            android:id="@+id/tv06"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="2dp"
+            android:text="2012"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv05"
+            app:layout_constraintEnd_toStartOf="@+id/tv05" />
+
+        <TextView
+            android:id="@+id/tv07"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="2dp"
+            android:text="2011"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv06"
+            app:layout_constraintEnd_toStartOf="@+id/tv06" />
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
+            android:text="2017"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv02"
+            app:layout_constraintStart_toEndOf="@+id/tv02" />
+
+        <TextView
+            android:id="@+id/tv03"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
+            android:text="2015"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv04"
+            app:layout_constraintStart_toEndOf="@+id/tv04" />
+
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
+            android:text="2016"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv03"
+            app:layout_constraintStart_toEndOf="@+id/tv03" />
+
+        <TextView
+            android:id="@+id/tv02Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
+            app:layout_constraintStart_toEndOf="@+id/tv03Value" />
+
+        <TextView
+            android:id="@+id/tv03Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
             android:text="00"
+            android:textAlignment="center"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv04Value"
             app:layout_constraintStart_toEndOf="@+id/tv04Value" />
 
-    <TextView
-        android:id="@+id/tv01Value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:text="0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
-        app:layout_constraintStart_toEndOf="@+id/tv02Value" />
+        <TextView
+            android:id="@+id/tv01Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="2dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv03Value"
+            app:layout_constraintStart_toEndOf="@+id/tv02Value" />
 
-    <TextView
-        android:id="@+id/tv04Value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp"
-        android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv04" />
+        <TextView
+            android:id="@+id/tv04Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="24dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv04" />
 
-    <TextView
-        android:id="@+id/tv06Value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:text="0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv05Value"
-        app:layout_constraintEnd_toStartOf="@+id/tv05Value" />
+        <TextView
+            android:id="@+id/tv06Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv05Value"
+            app:layout_constraintEnd_toStartOf="@+id/tv05Value" />
 
-    <TextView
-        android:id="@+id/tv07Value"
-        android:layout_width="9dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:text="0"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv05Value"
-        app:layout_constraintEnd_toStartOf="@+id/tv06Value" />
+        <TextView
+            android:id="@+id/tv07Value"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="0"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv06Value"
+            app:layout_constraintEnd_toStartOf="@+id/tv06Value" />
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
