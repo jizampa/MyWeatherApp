@@ -1,16 +1,10 @@
 package com.example.joao.myweatherapp;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,22 +13,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.MonthDay;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class WeatherClass extends AppCompatActivity {
 
@@ -44,7 +29,6 @@ public class WeatherClass extends AppCompatActivity {
     TextView tvCurrentTemp;
     TextView tvCurrenFL;
     TextView tvDescriptionWeather;
-
     TextView tv01Value;
     TextView tv02Value;
     TextView tv03Value;
@@ -94,15 +78,6 @@ public class WeatherClass extends AppCompatActivity {
 
     Calendar caledar;
 
-    //String urlBasePastYears ="https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=";
-    String urlLast01 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2017-11-07";
-    String urlLast02 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2016-11-07";
-    String urlLast03 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2015-11-07";
-    String urlLast04 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2014-11-07";
-    String urlLast05 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2013-11-07";
-    String urlLast06 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2012-11-07";
-    String urlLast07 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2011-11-07";
-    String urlNext7Days ="https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2018-11-09";
     String urlBase;
     String urlCity02 = "winnipeg";
     String urlAfterCity03 = "&format=json&date=";
@@ -148,6 +123,8 @@ public class WeatherClass extends AppCompatActivity {
 
         rbGroup = findViewById(R.id.rbGroup);
 
+        Date date = null;
+
         boolean resp01=false;
         boolean resp02=false;
         boolean resp03=false;
@@ -162,68 +139,32 @@ public class WeatherClass extends AppCompatActivity {
         value05=0;
         value06=0;
         value07=0;
-        valueXGraphDay = new int[7];
-        valueXGraphMonth = new int[7];
-        valueXGraphYear = new int[7];
+        valueXGraphDay = new int[8];
+        valueXGraphMonth = new int[8];
+        valueXGraphYear = new int[8];
         arrayDate = new int [7][3];
 
 
-       // url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=Winnipeg&format=json&num_of_days=5";
+//        // initiate with values so I don't have to call the api
+//        valueXGraphDay = new int[] {11, 10 , 9, 8, 7, 6, 5};
+//        valueXGraphMonth = new int[] {10, 9, 8, 7, 6, 5, 4};
+//        valueXGraphYear = new int[] {2017, 2016, 2015, 2014, 2013, 2012, 2011};
+//        value00 =-15;
+//        tvCurrentTemp.setText("-15");
+//        tvCurrenFL.setText("-25");
+//        tvDescriptionWeather.setText("cold");
+//        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         url = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json";
-//        urlLast01 = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=";
-
-        https://api.worldweatheronline.com/premium/v1/weather.ashx?key=38e388fea8fa4ff3a1f155126180411&q=winnipeg&format=json&date=2018-11-09
-
 
         mReqQueue = Volley.newRequestQueue(this);
-
-        ///////////////////
-        // Getting the current date
-        /////////////////////
-       caledar =  Calendar.getInstance();
-        Date today = caledar.getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDateToday = df.format(today);
-
-        caledar.add(Calendar.DAY_OF_YEAR, 1);
-        Date today01 = caledar.getTime();
-        SimpleDateFormat df01 = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDateToday01 = df01.format(today01);
-
-        caledar = Calendar.getInstance();
-        caledar.add(Calendar.MONTH, -12);
-        Date todayMenus01 = caledar.getTime();
-        SimpleDateFormat dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDateMenos1 = df01.format(todayMenus01);
-
-        caledar.add(Calendar.DAY_OF_YEAR, -1);
-        Date todayMenus01Ano = caledar.getTime();
-        SimpleDateFormat dfmenos01Ano = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDateToday01Ano = df01.format(todayMenus01);
-
-
-
-
-        Date date = null;
-        try {
-            date = df.parse(formattedDateToday);
-
-            day          = (String) DateFormat.format("dd",   date); // 20
-            monthNumber  = (String) DateFormat.format("MM",   date); // 06
-            year         = (String) DateFormat.format("yyyy", date); // 2013
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         ///////////////////////////
         //// Populating the current
         ///////////////////////////
         callAPI(url,0);
 
-/////////////////////////////
-        // Setting listeners
-        ////////////////////
         rb7Years.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -241,6 +182,26 @@ public class WeatherClass extends AppCompatActivity {
                     dayMonthYear= "year";
 
                     String testUrl;
+
+//                    // tobe deleter////////////////////////////////////////////////
+//
+//
+//                    value01 = Double.valueOf("-9");
+//                    tv01Value.setText(String.valueOf(valueXGraphYear[0]));
+//                    value02 = Double.valueOf("-5");
+//                    tv02Value.setText(String.valueOf(valueXGraphYear[1]));
+//                    value03 = Double.valueOf("-3");
+//                    tv03Value.setText(String.valueOf(valueXGraphYear[2]));
+//                    value04 = Integer.valueOf("-9");
+//                    tv04Value.setText(String.valueOf(valueXGraphYear[3]));
+//                    value05 = Integer.valueOf("-15");
+//                    tv05Value.setText(String.valueOf(valueXGraphYear[4]));
+//                    value06 = Integer.valueOf("-25");
+//                    tv06Value.setText(String.valueOf(valueXGraphYear[5]));
+//                    value07 = Integer.valueOf("-2");
+//                    tv07Value.setText(String.valueOf(valueXGraphYear[6]));
+//                    graphCriator();
+//////////////////////////////////////////////////////////////////////////////////////
 
                     do {
                         testUrl = formatedUrl(i, "sub", "year");
@@ -271,6 +232,27 @@ public class WeatherClass extends AppCompatActivity {
                     graphOrientation = "past";
                     int i = 1;
                     String testUrl;
+
+//                    // tobe deleter////////////////////////////////////////////////
+//
+//
+//                    value01 = Double.valueOf("-9");
+//                    tv01Value.setText(String.valueOf(valueXGraphYear[0]));
+//                    value02 = Double.valueOf("-5");
+//                    tv02Value.setText(String.valueOf(valueXGraphYear[1]));
+//                    value03 = Double.valueOf("-3");
+//                    tv03Value.setText(String.valueOf(valueXGraphYear[2]));
+//                    value04 = Integer.valueOf("-9");
+//                    tv04Value.setText(String.valueOf(valueXGraphYear[3]));
+//                    value05 = Integer.valueOf("-15");
+//                    tv05Value.setText(String.valueOf(valueXGraphYear[4]));
+//                    value06 = Integer.valueOf("-25");
+//                    tv06Value.setText(String.valueOf(valueXGraphYear[5]));
+//                    value07 = Integer.valueOf("-2");
+//                    tv07Value.setText(String.valueOf(valueXGraphYear[6]));
+//                    graphCriator();
+//////////////////////////////////////////////////////////////////////////////////////
+
                     do {
                         testUrl = formatedUrl(i, "sub", "month");
 
@@ -297,6 +279,11 @@ public class WeatherClass extends AppCompatActivity {
                     graphOrientation = "past";
                     int i = 1;
                     String testUrl;
+
+//                    // tobe deleter
+//                    graphCriator();
+///////////////////////////////////////////////
+
                     do {
                         testUrl = formatedUrl(i, "sub", "day");
 
@@ -321,8 +308,14 @@ public class WeatherClass extends AppCompatActivity {
                     value06=0;
                     value07=0;
                     int i = 1;
+                    dayMonthYear="day";
                     graphOrientation = "future";
                     String testUrl;
+
+//                    // tobe deleter
+//                    graphCriator();
+///////////////////////////////////////////////
+
                     do {
                         testUrl = formatedUrl(i, "add", "day");
 
@@ -335,39 +328,21 @@ public class WeatherClass extends AppCompatActivity {
             }
         });
 
-
-        //////////////////////////////////
-        ////////TESTING AREA
-        //////////////////////////////////////
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.add(Calendar.DATE, 1);
-
-
-
     }
-////////////////////////////////////
+    ////////////////////////////////
     ///My functions
     ////////////////////////////////////////
 
     private String formatedUrl(int num, String operation, String field){
 
-        int dayToModify=0;
-        int yearToModify=0;
-        int monthToModify=0;
-        String monthDay;
-
-
         Date todayMenus01;
         SimpleDateFormat dfmenos01,monthDayDF;
 
+        caledar = Calendar.getInstance();
+        valueXGraphYear[0] = caledar.get(Calendar.YEAR);
+        valueXGraphMonth[0] = (caledar.get(Calendar.MONTH))+1;
+        valueXGraphDay[0] = caledar.get(Calendar.DAY_OF_MONTH);
 
-
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-
-        dayToModify = Integer.valueOf(day);
-        monthToModify = Integer.valueOf(monthNumber);
-        yearToModify = Integer.valueOf(year);
 
         switch (field){
             case "day":
@@ -376,11 +351,8 @@ public class WeatherClass extends AppCompatActivity {
                 caledar.add(Calendar.DAY_OF_YEAR, num);
                 todayMenus01 = caledar.getTime();
                 dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
-
-//                monthDayDF = new SimpleDateFormat("MMM-dd");
-//                monthDay = monthDayDF.format(todayMenus01);
                 formattedDateMenos1 = dfmenos01.format(todayMenus01);
-                //dayToModify = (operation == "sub"? dayToModify - num : dayToModify + num);
+
                 break;
             case "month":
                 caledar = Calendar.getInstance();
@@ -388,10 +360,6 @@ public class WeatherClass extends AppCompatActivity {
                 todayMenus01 = caledar.getTime();
                 dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
                 formattedDateMenos1 = dfmenos01.format(todayMenus01);
-
-                //yearToModify = (operation == "sub"? yearToModify - num : yearToModify + num);
-
-                //monthToModify = (operation == "sub"? monthToModify - num : monthToModify + num);
                 break;
             case "year":
                 caledar = Calendar.getInstance();
@@ -399,58 +367,20 @@ public class WeatherClass extends AppCompatActivity {
                 todayMenus01 = caledar.getTime();
                 dfmenos01 = new SimpleDateFormat("yyyy-MM-dd");
                 formattedDateMenos1 = dfmenos01.format(todayMenus01);
-                yearToModify = (operation == "sub"? yearToModify - num : yearToModify + num);
                 break;
 
         }
         num =  Math.abs(num);
-        valueXGraphYear[num-1] = caledar.get(Calendar.YEAR);
-        valueXGraphMonth[num-1] = (caledar.get(Calendar.MONTH))+1;
-        valueXGraphDay[num-1] = caledar.get(Calendar.DAY_OF_MONTH);
+        valueXGraphYear[num] = caledar.get(Calendar.YEAR);
+        valueXGraphMonth[num] = (caledar.get(Calendar.MONTH))+1;
+        valueXGraphDay[num] = caledar.get(Calendar.DAY_OF_MONTH);
         arrayDate[num-1][0]=caledar.get(Calendar.DAY_OF_MONTH);
         arrayDate[num-1][1]=(caledar.get(Calendar.MONTH))+1;
         arrayDate[num-1][2]=caledar.get(Calendar.YEAR);
-        //String result = String.format("%s%s%s%d/%02d/%02d",urlBasePastYears01,urlCity02,urlAfterCity03,yearToModify,monthToModify,dayToModify );
         String result = String.format("%s%s%s%s",urlBase,urlCity02,urlAfterCity03,formattedDateMenos1);
 
         return result;
     }
-
-    private void setText(int field, Calendar cal, String dayYearOrMonth){
-       SimpleDateFormat monthDay, day, year;
-
-
-
-        cal = Calendar.getInstance();
-        cal.get(Calendar.DAY_OF_MONTH);
-
-
-//        switch (field){
-//            case 1:
-//                tvText01.setText(String.valueOf(value));
-//                break;
-//            case 2:
-//                tvText02.setText(String.valueOf(value));
-//                break;
-//            case 3:
-//                tvText03.setText(String.valueOf(value));
-//                break;
-//            case 4:
-//                tvText04.setText(String.valueOf(value));
-//                break;
-//            case 5:
-//                tvText05.setText(String.valueOf(value));
-//                break;
-//            case 6:
-//                tvText06.setText(String.valueOf(value));
-//                break;
-//            case 7:
-//                tvText07.setText(String.valueOf(value));
-//                break;
-//        }
-
-    }
-
 
     private void callAPI(String url, final int flag) {
 
@@ -477,7 +407,6 @@ public class WeatherClass extends AppCompatActivity {
                                 case 1:
                                     value01 = Double.valueOf(json.get("data/weather[0]/hourly[4]/tempC"));
                                     tv01Value.setText(json.get("data/weather[0]/hourly[3]/tempC"));
-
                                     resp01=true;
                                     break;
                                 case 2:
@@ -538,9 +467,6 @@ public class WeatherClass extends AppCompatActivity {
     }
 
 
-
-
-
     private void graphCriator(){
 
         switch (dayMonthYear){
@@ -559,76 +485,64 @@ public class WeatherClass extends AppCompatActivity {
 
         graph = findViewById(R.id.graph);
         graph.removeAllSeries();
-        Log.d("vaulues -00", String.valueOf(value00));
-        Log.d("vaulues -01", String.valueOf(value01));
-        Log.d("vaulues -02", String.valueOf(value02));
-        Log.d("vaulues -03", String.valueOf(value03));
-        Log.d("vaulues -04", String.valueOf(value04));
-        Log.d("vaulues -05", String.valueOf(value05));
-        Log.d("vaulues -06", String.valueOf(value06));
+
         LineGraphSeries<DataPoint> series;
 
 
         if (graphOrientation == "past"){
+            tvText01.setText(String.valueOf(valueXGraph[1]));
+            tvText02.setText(String.valueOf(valueXGraph[2]));
+            tvText03.setText(String.valueOf(valueXGraph[3]));
+            tvText04.setText(String.valueOf(valueXGraph[4]));
+            tvText05.setText(String.valueOf(valueXGraph[5]));
+            tvText06.setText(String.valueOf(valueXGraph[6]));
+            tvText07.setText(String.valueOf(valueXGraph[7]));
+            try {
+                series = new LineGraphSeries<>(new DataPoint[] {
 
-            tvText01.setText(String.valueOf(valueXGraph[0]));
-            tvText02.setText(String.valueOf(valueXGraph[1]));
-            tvText03.setText(String.valueOf(valueXGraph[2]));
-            tvText04.setText(String.valueOf(valueXGraph[3]));
-            tvText05.setText(String.valueOf(valueXGraph[4]));
-            tvText06.setText(String.valueOf(valueXGraph[5]));
-            tvText07.setText(String.valueOf(valueXGraph[6]));
-
-           series = new LineGraphSeries<>(new DataPoint[] {
-
-
-//
-//                new DataPoint(valueXGraph[0], value07),
-//                new DataPoint(valueXGraph[1], value06),
-//                new DataPoint(valueXGraph[2], value05),
-//                new DataPoint(valueXGraph[3], value04),
-//                new DataPoint(valueXGraph[4], value03),
-//                new DataPoint(valueXGraph[5], value02),
-//                new DataPoint(valueXGraph[6], value01)
-                    new DataPoint(1, value07),
-                    new DataPoint(2, value06),
-                    new DataPoint(3, value05),
-                    new DataPoint(4, value04),
-                    new DataPoint(5, value03),
-                    new DataPoint(6, value02),
-                    new DataPoint(7, value01)
-
-
-            });
-            graph.addSeries(series);
+                        new DataPoint(valueXGraph[7], value07),
+                        new DataPoint(valueXGraph[6], value06),
+                        new DataPoint(valueXGraph[5], value05),
+                        new DataPoint(valueXGraph[4], value04),
+                        new DataPoint(valueXGraph[3], value03),
+                        new DataPoint(valueXGraph[2], value02),
+                        new DataPoint(valueXGraph[1], value01),
+                        new DataPoint(valueXGraph[0], value00)
+                });
+                graph.addSeries(series);
+            }
+            catch (Exception e){
+                Log.d("error",e.toString());
+            }
 
         }else{
-            tvText01.setText(String.valueOf(valueXGraph[6]));
-            tvText02.setText(String.valueOf(valueXGraph[5]));
-            tvText03.setText(String.valueOf(valueXGraph[4]));
-            tvText04.setText(String.valueOf(valueXGraph[3]));
-            tvText05.setText(String.valueOf(valueXGraph[2]));
-            tvText06.setText(String.valueOf(valueXGraph[1]));
-            tvText07.setText(String.valueOf(valueXGraph[0]));
+            tvText01.setText(String.valueOf(valueXGraph[7]));
+            tvText02.setText(String.valueOf(valueXGraph[6]));
+            tvText03.setText(String.valueOf(valueXGraph[5]));
+            tvText04.setText(String.valueOf(valueXGraph[4]));
+            tvText05.setText(String.valueOf(valueXGraph[3]));
+            tvText06.setText(String.valueOf(valueXGraph[2]));
+            tvText07.setText(String.valueOf(valueXGraph[1]));
             try {
 
 
                 series = new LineGraphSeries<>(new DataPoint[]{
 //
-//                new DataPoint(valueXGraph[0], value07),
-//                new DataPoint(valueXGraph[1], value06),
-//                new DataPoint(valueXGraph[2], value05),
-//                new DataPoint(valueXGraph[3], value04),
-//                new DataPoint(valueXGraph[4], value03),
-//                new DataPoint(valueXGraph[5], value02),
-//                new DataPoint(valueXGraph[6], value01)
-                        new DataPoint(valueXGraph[0], value01),
-                        new DataPoint(2, value02),
-                        new DataPoint(3, value03),
-                        new DataPoint(4, value04),
-                        new DataPoint(5, value05),
-                        new DataPoint(6, value06),
-                        new DataPoint(7, value07)
+                new DataPoint(valueXGraph[0], value00),
+                new DataPoint(valueXGraph[1], value01),
+                new DataPoint(valueXGraph[2], value02),
+                new DataPoint(valueXGraph[3], value03),
+                new DataPoint(valueXGraph[4], value04),
+                new DataPoint(valueXGraph[5], value05),
+                new DataPoint(valueXGraph[6], value06),
+                new DataPoint(valueXGraph[7], value07),
+//                        new DataPoint(1, value01),
+//                        new DataPoint(2, value02),
+//                        new DataPoint(3, value03),
+//                        new DataPoint(4, value04),
+//                        new DataPoint(5, value05),
+//                        new DataPoint(6, value06),
+//                        new DataPoint(7, value07)
 
                 });
                 graph.addSeries(series);
