@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:background="@drawable/logo3"
+    tools:context=".CurrentConditions">
+
+    <TextView
+        android:id="@+id/tvPresure"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Presure"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFeelsLikeValue" />
+
+    <TextView
+        android:id="@+id/tvHeatIdex"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:text="Heat Idex"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPresure"
+        app:layout_constraintStart_toEndOf="@+id/tvPresure" />
+
+    <TextView
+        android:id="@+id/tvHumidity"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="Humidity"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPresure"
+        app:layout_constraintEnd_toStartOf="@+id/tvPresure" />
+
+    <TextView
+        android:id="@+id/tvFeelsLikeValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:autoText="false"
+        android:text="-35"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike" />
+
+    <TextView
+        android:id="@+id/tvCurrentTempValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:autoText="false"
+        android:text="-20"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLikeValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvFeelsLikeValue" />
+
+    <TextView
+        android:id="@+id/tvWindSpeed"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:text="Wind Speed"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike"
+        app:layout_constraintStart_toEndOf="@+id/tvFeelsLike" />
+
+    <TextView
+        android:id="@+id/tvWindSpeedValue"
+        android:layout_width="96dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:autoText="false"
+        android:text="15"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLikeValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/tvFeelsLikeValue" />
+
+    <TextView
+        android:id="@+id/tvCurrentTemp"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="Current Temp"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike"
+        app:layout_constraintEnd_toStartOf="@+id/tvFeelsLike" />
+
+    <TextView
+        android:id="@+id/tvFeelsLike"
+        android:layout_width="102dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="32dp"
+        android:text="Feels Like"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvWindDirection"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Wind Direction"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPresureValue" />
+
+    <TextView
+        android:id="@+id/tvWindChill"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:text="Wind Chill"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirection"
+        app:layout_constraintStart_toEndOf="@+id/tvWindDirection" />
+
+    <TextView
+        android:id="@+id/tvWindSpeed4"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="Wind Speed"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirection"
+        app:layout_constraintEnd_toStartOf="@+id/tvWindDirection" />
+
+    <TextView
+        android:id="@+id/tvPresureValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPresure" />
+
+    <TextView
+        android:id="@+id/tvHeatIdexValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="4dp"
+        android:text="5"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPresureValue"
+        app:layout_constraintStart_toEndOf="@+id/tvPresureValue" />
+
+    <TextView
+        android:id="@+id/tvWindSpeedValueExtra"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:text="25"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirectionValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvWindDirectionValue" />
+
+    <TextView
+        android:id="@+id/tvWindDirectionValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="NW"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindDirection" />
+
+    <TextView
+        android:id="@+id/tvWindChillValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:text="-25"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirectionValue"
+        app:layout_constraintStart_toEndOf="@+id/tvWindDirectionValue" />
+
+    <TextView
+        android:id="@+id/tvHumidityValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:text="60"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPresureValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvPresureValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofFrost"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Chance of Frost"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindDirectionValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofSunshine"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:text="Chance of Sunshine"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrost"
+        app:layout_constraintStart_toEndOf="@+id/tvChanceofFrost" />
+
+    <TextView
+        android:id="@+id/tvChanceofRain"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="Chance of Rain"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrost"
+        app:layout_constraintEnd_toStartOf="@+id/tvChanceofFrost" />
+
+    <TextView
+        android:id="@+id/tvChanceofFrostValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="20"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChanceofFrost" />
+
+    <TextView
+        android:id="@+id/tvChanceofSunshineValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrostValue"
+        app:layout_constraintStart_toEndOf="@+id/tvChanceofFrostValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofHightTempValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
+        app:layout_constraintEnd_toStartOf="@+id/textView31" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="90"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChanceofSnowValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofFogValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:text="85"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView31" />
+
+    <TextView
+        android:id="@+id/tvChanceofRainValue"
+        android:layout_width="104dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrostValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvChanceofFrostValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofSnowValue"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:text="Chance of Snow"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvChanceofFrostValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofFog"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:text="Chance  of Fog"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvChanceofSnowValue" />
+
+    <TextView
+        android:id="@+id/tvChanceofHightTemp"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="Chance of Hight Temp"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvChanceofSnowValue" />
+
+</android.support.constraint.ConstraintLayout>
