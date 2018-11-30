@@ -51,12 +51,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:autoText="false"
-        android:text="-35"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike2" />
 
     <TextView
         android:id="@+id/tvCurrentTempValue"
@@ -64,7 +64,6 @@
         android:layout_height="41dp"
         android:layout_marginEnd="8dp"
         android:autoText="false"
-        android:text="-20"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLikeValue"
@@ -78,8 +77,8 @@
         android:text="Wind Speed"
         android:textAlignment="center"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike"
-        app:layout_constraintStart_toEndOf="@+id/tvFeelsLike" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike2"
+        app:layout_constraintStart_toEndOf="@+id/tvFeelsLike2" />
 
     <TextView
         android:id="@+id/tvWindSpeedValue"
@@ -88,7 +87,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
         android:autoText="false"
-        android:text="15"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLikeValue"
@@ -97,18 +96,18 @@
         app:layout_constraintStart_toEndOf="@+id/tvFeelsLikeValue" />
 
     <TextView
-        android:id="@+id/tvCurrentTemp"
+        android:id="@+id/tvCurrentTemp2"
         android:layout_width="104dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:text="Current Temp"
         android:textAlignment="center"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike"
-        app:layout_constraintEnd_toStartOf="@+id/tvFeelsLike" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFeelsLike2"
+        app:layout_constraintEnd_toStartOf="@+id/tvFeelsLike2" />
 
     <TextView
-        android:id="@+id/tvFeelsLike"
+        android:id="@+id/tvFeelsLike2"
         android:layout_width="102dp"
         android:layout_height="18dp"
         android:layout_marginTop="32dp"
@@ -143,11 +142,11 @@
         app:layout_constraintStart_toEndOf="@+id/tvWindDirection" />
 
     <TextView
-        android:id="@+id/tvWindSpeed4"
+        android:id="@+id/tvSunHour"
         android:layout_width="104dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
-        android:text="Wind Speed"
+        android:text="Sun Hour"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirection"
@@ -160,7 +159,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="10"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,18 +171,18 @@
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginStart="4dp"
-        android:text="5"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvPresureValue"
         app:layout_constraintStart_toEndOf="@+id/tvPresureValue" />
 
     <TextView
-        android:id="@+id/tvWindSpeedValueExtra"
+        android:id="@+id/tvSunHourValue"
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginEnd="8dp"
-        android:text="25"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirectionValue"
@@ -196,7 +195,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="NW"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +207,7 @@
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:text="-25"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvWindDirectionValue"
@@ -219,7 +218,7 @@
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginEnd="8dp"
-        android:text="60"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvPresureValue"
@@ -242,7 +241,7 @@
         android:layout_width="104dp"
         android:layout_height="18dp"
         android:layout_marginStart="8dp"
-        android:text="Chance of Sunshine"
+        android:text="Sun Shine Chance"
         android:textAlignment="center"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrost"
@@ -266,7 +265,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="20"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -278,7 +277,7 @@
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:text="10"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofFrostValue"
@@ -292,22 +291,22 @@
         android:text="00"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
-        app:layout_constraintEnd_toStartOf="@+id/textView31" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
+        app:layout_constraintEnd_toStartOf="@+id/tvChanceofSnowValue" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/tvChanceofSnowValue"
         android:layout_width="104dp"
         android:layout_height="41dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="90"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChanceofSnowValue" />
+        app:layout_constraintTop_toBottomOf="@+id/tvChanceofSnow" />
 
     <TextView
         android:id="@+id/tvChanceofFogValue"
@@ -315,12 +314,12 @@
         android:layout_height="41dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:text="85"
+        android:text="00"
         android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView31" />
+        app:layout_constraintStart_toEndOf="@+id/tvChanceofSnowValue" />
 
     <TextView
         android:id="@+id/tvChanceofRainValue"
@@ -334,7 +333,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvChanceofFrostValue" />
 
     <TextView
-        android:id="@+id/tvChanceofSnowValue"
+        android:id="@+id/tvChanceofSnow"
         android:layout_width="104dp"
         android:layout_height="18dp"
         android:layout_marginTop="24dp"
@@ -354,9 +353,9 @@
         android:text="Chance  of Fog"
         android:textAlignment="center"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvChanceofSnowValue" />
+        app:layout_constraintStart_toEndOf="@+id/tvChanceofSnow" />
 
     <TextView
         android:id="@+id/tvChanceofHightTemp"
@@ -366,7 +365,7 @@
         android:text="Chance of Hight Temp"
         android:textAlignment="center"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnowValue"
-        app:layout_constraintEnd_toStartOf="@+id/tvChanceofSnowValue" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvChanceofSnow"
+        app:layout_constraintEnd_toStartOf="@+id/tvChanceofSnow" />
 
 </android.support.constraint.ConstraintLayout>

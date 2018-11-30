@@ -39,7 +39,7 @@ public class CallApi {
     }
 
     private void setLast7YearsYValues() throws JSONException {
-        setCurrentValues(); // to add the current temperarture to the array
+        //setCurrentValues(); // to add the current temperarture to the array
         String[] datesArray = new String[7];
         GetDates getdates = new GetDates();
         datesArray = getdates.getArrayOfPastDates("year");
@@ -52,7 +52,7 @@ public class CallApi {
     }
 
     private void setLast7monthYValues() throws JSONException {
-        setCurrentValues(); // to add the current temperarture to the array
+        //setCurrentValues(); // to add the current temperarture to the array
         String[] datesArray = new String[7];
         GetDates getdates = new GetDates();
         datesArray = getdates.getArrayOfPastDates("month");
@@ -66,7 +66,7 @@ public class CallApi {
     }
 
     private void setLast7dayYValues() throws JSONException {
-        setCurrentValues(); // to add the current temperarture to the array
+       // setCurrentValues(); // to add the current temperarture to the array
         String[] datesArray = new String[7];
         GetDates getdates = new GetDates();
         datesArray = getdates.getArrayOfPastDates("day");
@@ -85,22 +85,12 @@ public class CallApi {
         return currentDesc;
     }
 
-    public void setCurrentValues() throws JSONException {
-//        HttpHandler httphadler = new HttpHandler();
-//        JSON json = new JSON(new JSONObject(httphadler.makeServiceCall(this.getCurrentDateUrl("Winnipeg"))));
-        isReady = false;
-        this.getStringResponse(this.getCurrentDateUrl("Winnipeg"));
-        JSON json = new JSON(new JSONObject(resposne));
-        valuesForY[0] = Double.valueOf(json.get("data/current_condition[0]/temp_C"));
-//        currentTemp=json.get("data/current_condition[0]/temp_C");
-//        currentFL=json.get("data/current_condition[0]/FeelsLikeC");
-//        currentDesc = json.get("data/current_condition[0]/weatherDesc[0]/value");
-    }
 
-    public void testingResponse(){
+    public void testingResponse(String response){
         JSON json = null;
         try {
-            json = new JSON(new JSONObject(resposne));
+            json = new JSON(new JSONObject(response));
+            valuesForY[0] = Double.valueOf(json.get("data/current_condition[0]/temp_C"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -123,9 +113,9 @@ public class CallApi {
     public void getStringResponse(String url) {
         ThreadForGetStringResponse threadToGetStringResponse = new ThreadForGetStringResponse();
         threadToGetStringResponse.execute(url);
-        do {
-
-        } while (isReady == false);
+//        do {
+//
+//        } while (isReady == false);
     }
 
     public String getPastWeatherUrl(String city, String date) {
@@ -167,6 +157,9 @@ public class CallApi {
                 in.close();
 
 
+                this.onPostExecute(sb.toString());
+                this.cancel(true);
+
                 return sb.toString();
             } catch (ProtocolException e) {
                 e.printStackTrace();
@@ -185,8 +178,11 @@ public class CallApi {
             super.onPostExecute(s);
             resposne = s;
             isReady = true;
-            testingResponse();
+            testingResponse(s);
+
         }
+
+
 
 //        class HttpHandler {
 //
@@ -256,6 +252,36 @@ public class CallApi {
 //        }
     }
 
+    public JSON getJSON(String jsonUrl){
+
+        JSON json = null;
+        String response = null;
+        try {
+            URL url = new URL(jsonUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", System.getProperty("http.agent"));
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+            in.close();
+
+            json= new JSON(new JSONObject(sb.toString())) ;
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch (Exception e){
+            Log.d("Async", e.toString());
+        }
+        return json;
+    }
     class GetDates {
 
         Calendar calendar = Calendar.getInstance();
@@ -285,8 +311,8 @@ public class CallApi {
                         arrayOfXValues[i] = String.valueOf(calendar.get(Calendar.MONTH)) + 1;
                         break;
                     case "day":
-                        calendar.add(Calendar.DAY_OF_YEAR, (-1 * i));
-                        arrayOfXValues[i] = String.valueOf(Calendar.DAY_OF_MONTH);
+                         calendar.add(Calendar.DAY_OF_YEAR, (-1 * i));
+                        arrayOfXValues[i]= String.valueOf(Calendar.DAY_OF_MONTH);
                         break;
                 }
 
